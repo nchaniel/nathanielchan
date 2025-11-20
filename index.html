@@ -119,6 +119,23 @@
         .page {
             min-height: calc(100vh - 48px); /* Ensures pages take up space */
         }
+
+        /* --- NEW: Full Screen Project View Logic --- */
+        /* When body has class 'project-view-active', hide sidebar and make main full width */
+        body.project-view-active #sidebar {
+            display: none;
+        }
+        body.project-view-active #main-content {
+            width: 100%;
+            margin-left: 0;
+            padding: 0; /* Remove default padding, let sections handle it */
+        }
+        /* Center content in project view */
+        body.project-view-active .project-page-container {
+            max-width: 6xl; /* max-w-4xl normally, bumped for wide view */
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
     </style>
     <script>
         // Custom Tailwind config for the new light, modern theme
@@ -166,12 +183,15 @@
             let targetId;
             if (projectHashes.includes(hash)) {
                 targetId = hash;
+                // Enter "Project View Mode"
+                document.body.classList.add('project-view-active');
             } else {
-                targetId = 'home'; // Default to home if hash is unknown or #about/#projects
+                targetId = 'home'; 
+                // Exit "Project View Mode"
+                document.body.classList.remove('project-view-active');
             }
 
             document.querySelectorAll('.page').forEach(page => {
-                // Determine if the current page should be shown
                 const shouldShow = page.id === `page-${targetId}`;
                 page.style.display = shouldShow ? 'block' : 'none';
             });
@@ -187,8 +207,7 @@
                     console.warn('Could not scroll to section:', hash);
                 }
             } else if (targetId !== 'home') {
-                 // Scroll to top when navigating to a project
-                window.scrollTo(0, 0);
+                 window.scrollTo(0, 0);
             }
         }
     </script>
@@ -199,9 +218,9 @@
     <div class="lg:flex">
         
         <!-- ============================================== -->
-        <!-- FIXED SIDEBAR (Desktop) -->
+        <!-- FIXED SIDEBAR (Desktop) - ID added for toggling -->
         <!-- ============================================== -->
-        <header class="lg:w-1/3 xl:w-1/4 lg:h-screen lg:fixed lg:top-0 lg:left-0 lg:flex lg:flex-col lg:justify-between lg:p-12 p-6 sm:p-12 bg-brand-bg z-20 border-b lg:border-b-0 lg:border-r border-gray-200">
+        <header id="sidebar" class="lg:w-1/3 xl:w-1/4 lg:h-screen lg:fixed lg:top-0 lg:left-0 lg:flex lg:flex-col lg:justify-between lg:p-12 p-6 sm:p-12 bg-brand-bg z-20 border-b lg:border-b-0 lg:border-r border-gray-200">
             <!-- Top Part: Name, Title, Blurb -->
             <div>
                 <h1 class="font-display text-4xl font-bold text-brand-text-primary mb-2">
@@ -219,14 +238,12 @@
             <nav class="my-12 lg:my-0">
                 <ul class="space-y-2">
                     <li>
-                        <!-- Use href for smooth scrolling, JS router will ignore -->
                         <a href="#about-section" class="group flex items-center py-2">
                             <span class="w-8 h-px bg-gray-400 group-hover:bg-accent transition-colors mr-3"></span>
                             <span class="text-lg font-medium text-brand-text-muted group-hover:text-accent transition-colors">About</span>
                         </a>
                     </li>
                     <li>
-                        <!-- Use href for smooth scrolling, JS router will ignore -->
                         <a href="#projects-section" class="group flex items-center py-2">
                             <span class="w-8 h-px bg-gray-400 group-hover:bg-accent transition-colors mr-3"></span>
                             <span class="text-lg font-medium text-brand-text-muted group-hover:text-accent transition-colors">Projects</span>
@@ -253,9 +270,9 @@
         </header>
 
         <!-- ============================================== -->
-        <!-- SCROLLING CONTENT (Right Side) -->
+        <!-- SCROLLING CONTENT (Right Side) - ID added for toggling -->
         <!-- ============================================== -->
-        <main class="lg:w-2/3 xl:w-3/4 lg:ml-[33.333%] xl:ml-[25%] p-6 sm:p-12">
+        <main id="main-content" class="lg:w-2/3 xl:w-3/4 lg:ml-[33.333%] xl:ml-[25%] p-6 sm:p-12 transition-all duration-300">
 
             <!-- ============================================== -->
             <!-- 1. HOME PAGE CONTENT -->
@@ -265,7 +282,6 @@
                 <!-- "About Me" Section -->
                 <section id="about-section" class="py-12 lg:py-16 mb-12">
                     <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">About Me</h2>
-                    <!-- Introductory paragraph based on resume/previous summary -->
                     <p class="text-xl text-brand-text-secondary max-w-4xl text-left leading-relaxed">
                         I'm a Mechanical Engineering student at UC Berkeley, deeply passionate about optimizing robotic and mechanical systems. My focus is on <strong>design optimization</strong>, <strong>FEA (Finite Element Analysis)</strong>, and <strong>control systems</strong>. I thrive on the challenge of developing efficient and robust hardware solutions, particularly for complex space and bio-robotics applications.
                     </p>
@@ -277,13 +293,10 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                         
-                        <!-- PROJECT 1: 15 lb Combat Robot (Master Oogway) -->
+                        <!-- PROJECT 1: Master Oogway -->
                         <a href="#master-oogway" class="card-link block">
                             <div class="image-card-container project-master-oogway">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=15lb+Combat+Robot');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('images/Master%20Oogway%20Final%20Rendering.png');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">15 lb Combat Robot: Master Oogway</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Managed the full lifecycle of a 15 lb combat robot, driving down manufacturing costs by 31%.</p>
@@ -300,13 +313,10 @@
                             </div>
                         </a>
 
-                        <!-- Project 2: AI Rover Wrist Mechanism -->
+                         <!-- Project 2: AI Rover Wrist Mechanism -->
                         <a href="#ai-rover" class="card-link block">
                             <div class="image-card-container project-ai-rover">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=AI+Rover+Wrist');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=AI+Rover+Wrist');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">AI Rover Wrist Mechanism</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Designed and prototyped a pulley-driven differential mechanism for multi-axis control on a space rover arm.</p>
@@ -322,14 +332,11 @@
                                 </div>
                             </div>
                         </a>
-
-                        <!-- Project 3: Self-Driving Car Simulation -->
+                        
+                         <!-- Project 3: Self-Driving Car Simulation -->
                         <a href="#self-driving" class="card-link block">
                             <div class="image-card-container project-self-driving">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Self-Driving+Sim');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Self-Driving+Sim');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Self-Driving Car Simulation</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Developed an autonomous vehicle simulation using a custom JavaScript neural network and physics engine.</p>
@@ -346,13 +353,10 @@
                             </div>
                         </a>
                         
-                        <!-- Project 4: Wind Turbine Design & Analysis -->
+                         <!-- Project 4: Wind Turbine Design & Analysis -->
                         <a href="#wind-turbine" class="card-link block">
                             <div class="image-card-container project-wind-turbine">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Wind+Turbine+FEA');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Wind+Turbine+FEA');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Wind Turbine Design & Analysis</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Iteratively modeled and tested 3 rotor prototypes, achieving 18% greater efficiency and validating with FEA.</p>
@@ -372,10 +376,7 @@
                         <!-- Project 5: Exoskeleton Joint Optimization -->
                         <a href="#exoskeleton" class="card-link block">
                             <div class="image-card-container project-exoskeleton">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Exoskeleton+Joint');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Exoskeleton+Joint');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Exoskeleton Joint Optimization</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Used ANSYS FEA and topology optimization to reduce the weight of a 3D-printed exoskeleton joint by 13%.</p>
@@ -395,10 +396,7 @@
                         <!-- Project 6: Turnbuckle Tensioning Differential Mount -->
                         <a href="#differential-mount" class="card-link block">
                             <div class="image-card-container project-differential-mount">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Differential+Mount');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Differential+Mount');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Turnbuckle Differential Mount & Tensioner</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Designed and validated a differential mount with a turnbuckle chain tensioner using detailed SolidWorks FEA.</p>
@@ -418,10 +416,7 @@
                         <!-- Project 7: 1 lb Combat Robot (Eduroamers) -->
                         <a href="#eduroamers" class="card-link block">
                             <div class="image-card-container project-eduroamers">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=1lb+Training+Robot');">
-                                    <!-- Placeholder text is now in the image URL -->
-                                </div>
-                                <!-- Overlay Content -->
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=1lb+Training+Robot');"></div>
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">1 lb Combat Robot: Eduroamers</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">A robust, simple 1 lb robot project used to train new combat robotics club members in DFM and assembly.</p>
@@ -450,9 +445,9 @@
             <!-- ============================================== -->
             <!-- DETAIL PAGE: AI ROVER (EXISTING) -->
             <!-- ============================================== -->
-            <section id="page-ai-rover" class="page max-w-4xl mx-auto" style="display:none;">
+            <section id="page-ai-rover" class="page project-page-container mx-auto" style="display:none;">
                 <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors" onclick="history.back(); return false;">
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
                     <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
                     Back to Projects
                 </a>
@@ -519,16 +514,16 @@
 
                 <!-- Footer -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors" onclick="history.back(); return false;">Return to Main Portfolio</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
             <!-- ============================================== -->
             <!-- DETAIL PAGE: SELF-DRIVING (EXISTING) -->
             <!-- ============================================== -->
-            <section id="page-self-driving" class="page max-w-4xl mx-auto" style="display:none;">
+            <section id="page-self-driving" class="page project-page-container mx-auto" style="display:none;">
                 <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors" onclick="history.back(); return false;">
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
                     <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
                     Back to Projects
                 </a>
@@ -701,16 +696,16 @@
 
                 <!-- Footer -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors" onclick="history.back(); return false;">Return to Main Portfolio</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
             <!-- ============================================== -->
             <!-- DETAIL PAGE: WIND TURBINE (EXISTING) -->
             <!-- ============================================== -->
-            <section id="page-wind-turbine" class="page max-w-4xl mx-auto" style="display:none;">
+            <section id="page-wind-turbine" class="page project-page-container mx-auto" style="display:none;">
                 <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
                     <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
                     Back to Projects
                 </a>
@@ -780,16 +775,16 @@
 
                 <!-- Footer -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
             <!-- ============================================== -->
             <!-- DETAIL PAGE: EXOSKELETON (EXISTING) -->
             <!-- ============================================== -->
-            <section id="page-exoskeleton" class="page max-w-4xl mx-auto" style="display:none;">
+            <section id="page-exoskeleton" class="page project-page-container mx-auto" style="display:none;">
                 <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
                     <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
                     Back to Projects
                 </a>
@@ -859,185 +854,147 @@
 
                 <!-- Footer -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
-
             <!-- ============================================== -->
-            <!-- UPDATED DETAIL PAGE: MASTER OOGWAY (15 LB COMBAT ROBOT) -->
+            <!-- UPDATED DETAIL PAGE: MASTER OOGWAY (REDESIGNED) -->
             <!-- ============================================== -->
-            <section id="page-master-oogway" class="page max-w-4xl mx-auto" style="display:none;">
-                <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
-                    Back to Projects
-                </a>
-
-                <!-- Project Header -->
-                <div class="mb-12">
-                    <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-text-primary mb-3">
-                        15 lb Combat Robot: Master Oogway
-                    </h1>
-                    <p class="text-xl text-accent font-medium">Weapon System Design and Manufacturing Optimization</p>
-                    <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Design for Manufacture (DFM)</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Kinetic Energy Analysis</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">FEA & GD&T</span>
+            <section id="page-master-oogway" class="page project-page-container mx-auto" style="display:none;">
+                
+                <!-- Top Bar -->
+                <div class="flex justify-between items-center mb-12">
+                     <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent transition-colors font-medium">
+                        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                        Back to Projects
+                    </a>
+                    <div class="flex space-x-3">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">DFM</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">FEA</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">Kinetic Energy</span>
                     </div>
                 </div>
+
+                <!-- Project Title & Hero -->
+                <h1 class="font-display text-5xl font-bold text-brand-text-primary mb-2">15 lb Combat Robot: Master Oogway</h1>
+                <p class="text-xl text-brand-text-secondary mb-8">Cost Optimization & High-KE Weapon Design</p>
                 
-                <!-- Main Hero Image -->
-                <div class="bg-white p-2 rounded-xl shadow-lg mb-12 border border-gray-200">
-                     <!-- UPDATE: Ready for local file structure -->
-                     <img src="images/Master Oogway Final Rendering.png" alt="Master Oogway Final Rendering" class="w-full h-auto rounded-lg" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                     <p class="text-center text-xs text-brand-text-muted mt-2 italic" style="display:none;">Image not found: Ensure 'images/Master Oogway Final Rendering.png' exists.</p> 
+                <div class="w-full mb-16">
+                     <img src="images/Master Oogway Final Rendering.png" alt="Master Oogway Final Rendering" class="w-full h-auto rounded-xl shadow-lg" onerror="this.style.display='none';">
                 </div>
 
-                <!-- Project Details -->
-                <div class="space-y-10 text-brand-text-secondary text-lg leading-relaxed">
-                    
-                    <!-- 1. PROBLEM, PURPOSE, OBJECTIVE -->
-                    <section>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Problem</h3>
-                                <p>Current team design lacked a high-KE weapon system that was manufacturable within the allocated budget and weight class.</p>
+                <!-- 1. WHAT (The Challenge) -->
+                <div class="mb-16">
+                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-4">What</h2>
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            Our team faced a critical gap: our 15 lb combat robot design lacked a high-Kinetic Energy (KE) weapon system that could be manufactured within our strict budget and weight limits.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            <div>
+                                <h3 class="font-bold text-brand-text-primary mb-2">The Problem</h3>
+                                <p class="text-brand-text-secondary">Existing designs were either too expensive to CNC or too heavy for the 15 lb weight class.</p>
                             </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Purpose</h3>
-                                <p>To engineer a weapon system that maximizes impact energy potential while minimizing the complexity and cost of fabrication.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Objective</h3>
-                                <p>Design a cost-optimized, high-KE vertical spinner that adheres to the 15 lb weight limit and reduces manufacturing expenditure by at least 25%.</p>
+                            <div>
+                                <h3 class="font-bold text-brand-text-primary mb-2">The Objective</h3>
+                                <p class="text-brand-text-secondary">Design a cost-optimized, high-KE vertical spinner that adheres to the 15 lb weight limit and reduces manufacturing expenditure by at least 25%.</p>
                             </div>
                         </div>
-                    </section>
+                    </div>
+                </div>
 
-                    <!-- 2. DESIGN PROCESS & IMPLEMENTATION -->
-                    <section>
-                        <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-3 mb-6 flex items-center">
-                            <i data-lucide="layers" class="w-6 h-6 mr-3 text-accent"></i> Design Process & Implementation
-                        </h2>
-                        
-                        <h3 class="font-display text-2xl font-semibold text-accent mt-6">A. Initial Concept Selection and Kinematics</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 my-6">
+                <!-- 2. HOW (Design Process) -->
+                <div class="mb-16">
+                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">How</h2>
+                    
+                    <!-- Process Step 1: Concept -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-accent mb-3">1. Drisk Architecture Selection</h3>
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            I selected an asymmetrical <strong>Drum-Disk Hybrid (Drisk)</strong> geometry. This architecture maximizes the <strong>Moment of Inertia (MoI)</strong> relative to weight, providing the high kinetic energy of a drum spinner without the prohibitive cost of CNC-machining a complex steel eggbeater shape.
+                        </p>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                              <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <!-- UPDATE: Ready for local file structure -->
                                 <img src="images/Master Oogway Motor Mount.png" alt="Motor Mount Design" class="w-full h-48 object-contain rounded" onerror="this.style.display='none';">
                                 <p class="text-center text-xs text-brand-text-muted mt-2">Motor Mount Design</p>
                              </div>
                              <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <!-- UPDATE: Ready for local file structure -->
                                 <img src="images/Master Oogway Weapon Assembly.png" alt="Weapon Assembly" class="w-full h-48 object-contain rounded" onerror="this.style.display='none';">
                                 <p class="text-center text-xs text-brand-text-muted mt-2">Weapon Assembly</p>
                              </div>
                         </div>
-                        <ul class="list-disc list-inside space-y-3 ml-4">
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>
-                                    The team selected an asymmetrical <strong>Drum-Disk Hybrid (Drisk)</strong> geometry. This design maximizes the <strong>Moment of Inertia (MoI)</strong> relative to weight, providing high kinetic energy while avoiding the complex CNC machining required for a full steel eggbeater weapon.
-                                </div>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>
-                                    A <strong>580 kV</strong> motor was coupled with a <strong>1:1.4</strong> pulley reduction, resulting in a rotational velocity of <strong>8950 RPM</strong> to meet the target KE requirement.
-                                </div>
-                            </li>
-                        </ul>
+                    </div>
 
-                        <h3 class="font-display text-2xl font-semibold text-accent mt-8">B. DFM and Iterative Optimization</h3>
-                        
-                        <div class="bg-white p-4 rounded-xl shadow-inner my-6 border border-gray-200">
-                            <!-- UPDATE: Ready for local file structure -->
-                            <img src="images/Master Oogway no top plate.jpg" alt="Internal Layout - No Top Plate" class="w-full h-auto rounded-lg" onerror="this.style.display='none';">
-                            <p class="text-center text-xs text-brand-text-muted mt-2 italic">Internal component layout optimization for DFM</p>
-                        </div>
-                        
-                        <ul class="list-disc list-inside space-y-3 ml-4">
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Identified a key manufacturing bottleneck: the initial thick steel disk design prevented the waterjet vendor from cutting the required center diameter hole economically.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Executed an iterative redesign of the AR500 disks to be <strong>thinner, with a proportionally larger outer diameter</strong>, successfully maintaining the exact target <strong>MoI and mass</strong> while making the part compatible with high-volume, cost-efficient waterjet cutting.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Designed a custom <strong>6061 Aluminum hub</strong> for bolting the two steel disks together and created over <strong>20</strong> detailed <strong>GD&T</strong> shop drawings to meet tight machining tolerances.</div>
-                            </li>
-                        </ul>
-
-                        <!-- GD&T Drawings Section -->
-                        <h3 class="font-display text-2xl font-semibold text-accent mt-8">C. Technical Documentation (GD&T)</h3>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 my-6">
-                            <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <!-- UPDATE: Ready for local file structure -->
-                                <img src="images/Master Oogway - Bearing Mount Drawing v2-1.png" alt="Bearing Mount Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
-                                <p class="text-center text-xs text-brand-text-muted mt-2">Bearing Mount Drawing</p>
-                            </div>
-                            <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <!-- UPDATE: Ready for local file structure -->
-                                <img src="images/MasterOogwayWeaponHubDrawingManufacturing-1.png" alt="Weapon Hub Manufacturing" class="w-full h-auto rounded" onerror="this.style.display='none';">
-                                <p class="text-center text-xs text-brand-text-muted mt-2">Weapon Hub Manufacturing Drawing</p>
-                            </div>
-                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm md:col-span-2">
-                                <!-- UPDATE: Ready for local file structure -->
-                                <img src="images/MasterOogwayWeaponHubDrawingTapping-1.png" alt="Weapon Hub Tapping" class="w-full h-auto rounded" onerror="this.style.display='none';">
-                                <p class="text-center text-xs text-brand-text-muted mt-2">Weapon Hub Tapping Drawing</p>
-                            </div>
-                        </div>
-
-                    </section>
-                    
-                    <!-- 3. QUANTIFIABLE RESULTS -->
-                    <section>
-                        <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-3 mb-6 flex items-center">
-                            <i data-lucide="activity" class="w-6 h-6 mr-3 text-accent"></i> Quantifiable Results
-                        </h2>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-6">
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <i data-lucide="dollar-sign" class="w-8 h-8 text-accent mx-auto mb-2"></i>
-                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">31%</p>
-                                <p class="text-sm font-medium text-brand-text-secondary">Reduction in Manufacturing Costs</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <i data-lucide="bolt" class="w-8 h-8 text-accent mx-auto mb-2"></i>
-                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">1.5 kJ</p>
-                                <p class="text-sm font-medium text-brand-text-secondary">Maximum Kinetic Energy Output</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <i data-lucide="rotate-ccw" class="w-8 h-8 text-accent mx-auto mb-2"></i>
-                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">21%</p>
-                                <p class="text-sm font-medium text-brand-text-secondary">Reduction in Max Flat Turn Rate</p>
-                            </div>
-                        </div>
-                        
-                        <p class="text-lg mt-8">
-                            The successful redesign and material choices resulted in a <strong>31% reduction in total weapon manufacturing cost</strong>. The high MoI delivered the target <strong>1.5 kJ</strong> of kinetic energy. The calculated <strong>21%</strong> decrease in the robot's maximum flat turn rate was logged as an expected trade-off, accounted for by prioritizing weapon performance through the gyroscope effects of the large spinning mass.
+                    <!-- Process Step 2: Iterative Optimization -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-accent mb-3">2. Iterative Optimization for DFM</h3>
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            During the DFM review, we hit a roadblock: our initial weapon design was too thick for our vendor to cost-effectively waterjet. I executed an iterative redesign (shown below), making the disks <strong>thinner</strong> but increasing their <strong>outer diameter</strong> to maintain the exact target MoI and mass while enabling cheap waterjet cutting.
                         </p>
-                    </section>
-                    
+                        <div class="bg-white p-4 rounded-xl shadow-inner border border-gray-200 mb-6">
+                            <img src="images/Master Oogway Disk Alterations.jpg" alt="Weapon Disk Iteration Process" class="w-full h-auto rounded-lg" onerror="this.style.display='none';">
+                            <p class="text-center text-sm text-brand-text-secondary mt-3 font-medium">
+                                Design Evolution: Thinner, wider profile optimized for waterjet cutting.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Process Step 3: Manufacturing -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-accent mb-3">3. Manufacturing & GD&T</h3>
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            To connect these new disks, I designed a custom <strong>6061 Aluminum hub</strong>. I chose to manually tap the bolt holes rather than paying for CNC threading, contributing to a <strong>31% cost reduction</strong>. I produced detailed GD&T drawings to ensure the motor mount bend and hub fit were perfect on the first try.
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
+                                <img src="images/Master Oogway - Bearing Mount Drawing v2-1.png" alt="Bearing Mount Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
+                            </div>
+                            <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
+                                <img src="images/MasterOogwayWeaponHubDrawingManufacturing-1.png" alt="Manufacturing Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
+                            </div>
+                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
+                                <img src="images/MasterOogwayWeaponHubDrawingTapping-1.png" alt="Tapping Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
-                <!-- Footer -->
-                <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors" onclick="history.back(); return false;">Return to Main Portfolio</a>
-                </footer>
+                <!-- 3. RESULTS -->
+                <div class="mb-16">
+                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">Results</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                            <p class="text-5xl font-bold text-accent mb-2">31%</p>
+                            <p class="text-brand-text-secondary font-medium">Cost Reduction</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                            <p class="text-5xl font-bold text-accent mb-2">1.5 kJ</p>
+                            <p class="text-brand-text-secondary font-medium">Kinetic Energy</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                            <p class="text-5xl font-bold text-accent mb-2">100%</p>
+                            <p class="text-brand-text-secondary font-medium">DFM Compliance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-12 border-t border-gray-200">
+                    <a href="index.html" class="inline-flex items-center text-lg font-medium text-accent hover:text-brand-text-primary transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                        Back to All Projects
+                    </a>
+                </div>
+
             </section>
 
 
             <!-- ============================================== -->
             <!-- UPDATED DETAIL PAGE: DIFFERENTIAL MOUNT (FIXED FORMATTING) -->
             <!-- ============================================== -->
-            <section id="page-differential-mount" class="page max-w-4xl mx-auto" style="display:none;">
+            <section id="page-differential-mount" class="page project-page-container mx-auto" style="display:none;">
                 <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
                     <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
                     Back to Projects
                 </a>
@@ -1140,19 +1097,16 @@
                         </h2>
                         
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-6">
-                            
                             <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                                 <i data-lucide="weight" class="w-8 h-8 text-accent mx-auto mb-2"></i>
                                 <p class="text-4xl font-extrabold text-brand-text-primary mb-1">115g / 150g</p>
                                 <p class="text-sm font-medium text-brand-text-secondary">Final Optimized Mount Weights</p>
                             </div>
-                            
                             <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                                 <i data-lucide="trending-down" class="w-8 h-8 text-accent mx-auto mb-2"></i>
                                 <p class="text-4xl font-extrabold text-brand-text-primary mb-1">50%</p>
                                 <p class="text-sm font-medium text-brand-text-secondary">Jacking Bar Weight Reduction</p>
                             </div>
-                            
                             <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
                                 <i data-lucide="shield-check" class="w-8 h-8 text-accent mx-auto mb-2"></i>
                                 <p class="text-4xl font-extrabold text-brand-text-primary mb-1">1.5 FoS</p>
@@ -1164,21 +1118,19 @@
                             The topology optimization and bell crank design were highly successful. The final mounts were reduced to <strong>115g and 150g</strong>, and the associated jacking bar's weight was <strong>reduced by 50%</strong>. All components, including tabs and mounting hardware, were validated in FEA to meet the strict <strong>1.5 Factor of Safety</strong> requirement.
                         </p>
                     </section>
-                    
                 </div>
 
-                <!-- Footer -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
             <!-- ============================================== -->
             <!-- NEW DETAIL PAGE: EDUROAMERS (1 LB COMBAT ROBOT) -->
             <!-- ============================================== -->
-            <section id="page-eduroamers" class="page max-w-4xl mx-auto" style="display:none;">
+            <section id="page-eduroamers" class="page project-page-container mx-auto" style="display:none;">
                 <!-- Back Button -->
-                <a href="#" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
                     <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
                     Back to Projects
                 </a>
@@ -1248,7 +1200,7 @@
 
                 <!-- Footer -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="#" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
