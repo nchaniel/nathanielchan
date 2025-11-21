@@ -132,7 +132,7 @@
         }
         /* Center content in project view */
         body.project-view-active .project-page-container {
-            max-width: 6xl; /* max-w-4xl normally, bumped for wide view */
+            max-width: 72rem; /* FIXED: Use standard CSS property max-width instead of max-w */
             margin: 0 auto;
             padding: 3rem 1.5rem;
         }
@@ -174,10 +174,10 @@
         function navigate() {
             const hash = window.location.hash.replace('#', '');
             
-            // Check for project hashes
+            // Check for project hashes (REMOVED wind-turbine and eduroamers)
             const projectHashes = [
-                'master-oogway', 'ai-rover', 'self-driving', 'wind-turbine', 
-                'exoskeleton', 'differential-mount', 'eduroamers'
+                'master-oogway', 'ai-rover', 'self-driving', 
+                'exoskeleton', 'differential-mount'
             ];
             
             let targetId;
@@ -282,6 +282,7 @@
                 <!-- "About Me" Section -->
                 <section id="about-section" class="py-12 lg:py-16 mb-12">
                     <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">About Me</h2>
+                    <!-- Introductory paragraph based on resume/previous summary -->
                     <p class="text-xl text-brand-text-secondary max-w-4xl text-left leading-relaxed">
                         I'm a Mechanical Engineering student at UC Berkeley, deeply passionate about optimizing robotic and mechanical systems. My focus is on <strong>design optimization</strong>, <strong>FEA (Finite Element Analysis)</strong>, and <strong>control systems</strong>. I thrive on the challenge of developing efficient and robust hardware solutions, particularly for complex space and bio-robotics applications.
                     </p>
@@ -293,10 +294,13 @@
                     
                     <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
                         
-                        <!-- PROJECT 1: Master Oogway -->
+                        <!-- PROJECT 1: 15 lb Combat Robot (Master Oogway) -->
                         <a href="#master-oogway" class="card-link block">
                             <div class="image-card-container project-master-oogway">
-                                <div class="image-card-media" style="background-image: url('images/Master%20Oogway%20Final%20Rendering.png');"></div>
+                                <div class="image-card-media" style="background-image: url('images/Master%20Oogway%20Final%20Rendering.png');">
+                                    <!-- Placeholder text is now in the image URL -->
+                                </div>
+                                <!-- Overlay Content -->
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">15 lb Combat Robot: Master Oogway</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Managed the full lifecycle of a 15 lb combat robot, driving down manufacturing costs by 31%.</p>
@@ -313,10 +317,13 @@
                             </div>
                         </a>
 
-                         <!-- Project 2: AI Rover Wrist Mechanism -->
+                        <!-- Project 2: AI Rover Wrist Mechanism -->
                         <a href="#ai-rover" class="card-link block">
                             <div class="image-card-container project-ai-rover">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=AI+Rover+Wrist');"></div>
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=AI+Rover+Wrist');">
+                                    <!-- Placeholder text is now in the image URL -->
+                                </div>
+                                <!-- Overlay Content -->
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">AI Rover Wrist Mechanism</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Designed and prototyped a pulley-driven differential mechanism for multi-axis control on a space rover arm.</p>
@@ -332,11 +339,14 @@
                                 </div>
                             </div>
                         </a>
-                        
-                         <!-- Project 3: Self-Driving Car Simulation -->
+
+                        <!-- Project 3: Self-Driving Car Simulation -->
                         <a href="#self-driving" class="card-link block">
                             <div class="image-card-container project-self-driving">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Self-Driving+Sim');"></div>
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Self-Driving+Sim');">
+                                    <!-- Placeholder text is now in the image URL -->
+                                </div>
+                                <!-- Overlay Content -->
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Self-Driving Car Simulation</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Developed an autonomous vehicle simulation using a custom JavaScript neural network and physics engine.</p>
@@ -353,30 +363,13 @@
                             </div>
                         </a>
                         
-                         <!-- Project 4: Wind Turbine Design & Analysis -->
-                        <a href="#wind-turbine" class="card-link block">
-                            <div class="image-card-container project-wind-turbine">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Wind+Turbine+FEA');"></div>
-                                <div class="image-card-overlay">
-                                    <h3 class="text-2xl font-bold text-white mb-2">Wind Turbine Design & Analysis</h3>
-                                    <p class="text-indigo-100 mb-4 text-sm">Iteratively modeled and tested 3 rotor prototypes, achieving 18% greater efficiency and validating with FEA.</p>
-                                    <div class="image-card-skills flex flex-wrap gap-2">
-                                        <span class="px-3 py-1 bg-white/90 text-indigo-800 text-xs rounded-full font-medium">Aerodynamics</span>
-                                        <span class="px-3 py-1 bg-white/90 text-indigo-800 text-xs rounded-full font-medium">SolidWorks</span>
-                                        <span class="px-3 py-1 bg-white/90 text-indigo-800 text-xs rounded-full font-medium">FEA</span>
-                                    </div>
-                                    <p class="mt-4 text-white text-sm font-medium flex items-center">
-                                        View Details 
-                                        <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
-
-                        <!-- Project 5: Exoskeleton Joint Optimization -->
+                        <!-- Project 4: Exoskeleton Joint Optimization -->
                         <a href="#exoskeleton" class="card-link block">
                             <div class="image-card-container project-exoskeleton">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Exoskeleton+Joint');"></div>
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Exoskeleton+Joint');">
+                                    <!-- Placeholder text is now in the image URL -->
+                                </div>
+                                <!-- Overlay Content -->
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Exoskeleton Joint Optimization</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Used ANSYS FEA and topology optimization to reduce the weight of a 3D-printed exoskeleton joint by 13%.</p>
@@ -393,10 +386,13 @@
                             </div>
                         </a>
 
-                        <!-- Project 6: Turnbuckle Tensioning Differential Mount -->
+                        <!-- Project 5: Turnbuckle Tensioning Differential Mount -->
                         <a href="#differential-mount" class="card-link block">
                             <div class="image-card-container project-differential-mount">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Differential+Mount');"></div>
+                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=Differential+Mount');">
+                                    <!-- Placeholder text is now in the image URL -->
+                                </div>
+                                <!-- Overlay Content -->
                                 <div class="image-card-overlay">
                                     <h3 class="text-2xl font-bold text-white mb-2">Turnbuckle Differential Mount & Tensioner</h3>
                                     <p class="text-indigo-100 mb-4 text-sm">Designed and validated a differential mount with a turnbuckle chain tensioner using detailed SolidWorks FEA.</p>
@@ -412,26 +408,6 @@
                                 </div>
                             </div>
                         </a>
-                        
-                        <!-- Project 7: 1 lb Combat Robot (Eduroamers) -->
-                        <a href="#eduroamers" class="card-link block">
-                            <div class="image-card-container project-eduroamers">
-                                <div class="image-card-media" style="background-image: url('https://placehold.co/600x400/F3F4F6/4B5563?text=1lb+Training+Robot');"></div>
-                                <div class="image-card-overlay">
-                                    <h3 class="text-2xl font-bold text-white mb-2">1 lb Combat Robot: Eduroamers</h3>
-                                    <p class="text-indigo-100 mb-4 text-sm">A robust, simple 1 lb robot project used to train new combat robotics club members in DFM and assembly.</p>
-                                    <div class="image-card-skills flex flex-wrap gap-2">
-                                        <span class="px-3 py-1 bg-white/90 text-indigo-800 text-xs rounded-full font-medium">Mentorship</span>
-                                        <span class="px-3 py-1 bg-white/90 text-indigo-800 text-xs rounded-full font-medium">CAD</span>
-                                        <span class="px-3 py-1 bg-white/90 text-indigo-800 text-xs rounded-full font-medium">Rapid Prototyping</span>
-                                    </div>
-                                    <p class="mt-4 text-white text-sm font-medium flex items-center">
-                                        View Details 
-                                        <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
-                                    </p>
-                                </div>
-                            </div>
-                        </a>
 
                     </div>
                 </section>
@@ -439,6 +415,273 @@
                 <!-- Footer (Home) -->
                 <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
                     &copy; 2025 Nathaniel Chan. All rights reserved.
+                </footer>
+            </section>
+
+            <!-- ============================================== -->
+            <!-- UPDATED DETAIL PAGE: MASTER OOGWAY (15 LB COMBAT ROBOT) -->
+            <!-- ============================================== -->
+            <section id="page-master-oogway" class="page project-page-container mx-auto" style="display:none;">
+                
+                <!-- Top Bar -->
+                <div class="flex justify-between items-center mb-12">
+                     <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent transition-colors font-medium">
+                        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                        Back to Projects
+                    </a>
+                    <div class="flex space-x-3">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">DFM</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">FEA</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">Kinetic Energy</span>
+                    </div>
+                </div>
+
+                <!-- Project Title & Hero -->
+                <h1 class="font-display text-5xl font-bold text-brand-text-primary mb-2">15 lb Combat Robot: Master Oogway</h1>
+                <p class="text-xl text-brand-text-secondary mb-8">Cost Optimization & High-KE Weapon Design</p>
+                
+                <div class="w-full mb-16">
+                     <img src="images/Master Oogway Final Rendering.png" alt="Master Oogway Final Rendering" class="w-full h-auto rounded-xl shadow-lg" onerror="this.style.display='none';">
+                </div>
+
+                <!-- 1. THE CHALLENGE & OBJECTIVE (Combined) -->
+                <div class="mb-16">
+                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-4">The Challenge & Objective</h2>
+                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            Our team faced a critical gap: our 15 lb combat robot design lacked a high-Kinetic Energy (KE) weapon system that could be manufactured within our strict budget and weight limits. The purpose of this project was to engineer a weapon that maximized destructive potential while minimizing fabrication complexity.
+                        </p>
+                        <div class="bg-gray-50 p-6 rounded-lg border-l-4 border-accent italic text-brand-text-primary">
+                            "Design a cost-optimized, high-KE vertical spinner that adheres to the 15 lb weight limit and reduces manufacturing expenditure by at least 25%."
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. DESIGN PROCESS & IMPLEMENTATION (Structured Narrative) -->
+                <div class="mb-16">
+                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">Design Process & Implementation</h2>
+                    
+                    <!-- Section A: Iterative Optimization -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-accent mb-3">Iterative Optimization for DFM</h3>
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            Initial analysis identified a critical manufacturing bottleneck: the original weapon geometry was too thick for our vendor to cost-effectively waterjet the center mounting hole. This constraint threatened to exceed our budget with expensive CNC machining costs.
+                        </p>
+                        <div class="bg-white p-4 rounded-xl shadow-inner border border-gray-200 mb-6">
+                            <img src="images/Master Oogway Disk Alterations.jpg" alt="Weapon Disk Iteration Process" class="w-full h-auto rounded-lg" onerror="this.style.display='none';">
+                            <p class="text-center text-sm text-brand-text-secondary mt-3 font-medium">
+                                Design Evolution: Transitioning from a thick, costly geometry to a thinner, wider profile optimized for waterjet cutting.
+                            </p>
+                        </div>
+                        <p class="text-lg text-brand-text-secondary leading-relaxed">
+                            I executed an iterative redesign (shown above), modifying the AR500 steel disks to be <strong>thinner</strong> while increasing their <strong>outer diameter</strong>. This strategic adjustment successfully maintained the exact target <strong>Moment of Inertia (MoI) and mass</strong> required for the weapon's energy output, all while making the part compatible with high-volume, cost-efficient waterjet cutting.
+                        </p>
+                    </div>
+
+                    <!-- Section B: Manufacturing Strategy -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-accent mb-3">Strategic Manufacturing Decisions</h3>
+                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
+                            To connect these new disks, I designed a custom <strong>6061 Aluminum hub</strong>. A key cost-saving measure was the decision to <strong>manually tap the bolt holes</strong> on the hub rather than specifying a CNC threading operation. This decision alone, combined with the optimized disk geometry, directly contributed to a <strong>31% reduction in overall manufacturing costs</strong> without compromising structural integrity.
+                        </p>
+                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
+                                <img src="images/MasterOogwayWeaponHubDrawingManufacturing-1.png" alt="Hub Manufacturing Drawing" class="w-full h-48 object-contain rounded" onerror="this.style.display='none';">
+                                <p class="text-center text-xs text-brand-text-muted mt-2">Manufacturing Drawing</p>
+                             </div>
+                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
+                                <img src="images/MasterOogwayWeaponHubDrawingTapping-1.png" alt="Hub Tapping Drawing" class="w-full h-48 object-contain rounded" onerror="this.style.display='none';">
+                                <p class="text-center text-xs text-brand-text-muted mt-2">Manual Tapping Drawing</p>
+                             </div>
+                        </div>
+                    </div>
+
+                    <!-- Section C: Motor Mount & GD&T -->
+                    <div class="mb-12">
+                        <h3 class="text-xl font-bold text-accent mb-3">Precision Alignment via GD&T</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
+                                <img src="images/Master Oogway Motor Mount.png" alt="Motor Mount Design" class="w-full h-auto rounded" onerror="this.style.display='none';">
+                                <p class="text-center text-xs text-brand-text-muted mt-2">Bent Motor Mount Design</p>
+                             </div>
+                             <div>
+                                 <p class="text-lg text-brand-text-secondary leading-relaxed">
+                                     The motor mount required a precise bend angle to ensure perfect alignment of the belt drive system. I produced detailed <strong>GD&T shop drawings</strong> (like the bearing mount drawing below) to clearly communicate this critical bend tolerance to fabricators. This attention to detail ensured correct belt tension and alignment on the very first assembly, avoiding costly rework.
+                                 </p>
+                             </div>
+                        </div>
+                         <div class="mt-6 bg-white p-2 rounded-lg border border-gray-200 shadow-sm w-full md:w-2/3 mx-auto">
+                            <img src="images/Master Oogway - Bearing Mount Drawing v2-1.png" alt="Bearing Mount GD&T Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
+                            <p class="text-center text-xs text-brand-text-muted mt-2">GD&T Drawing for Bearing Mount</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. RESULTS -->
+                <div class="mb-16">
+                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">Results</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                            <p class="text-5xl font-bold text-accent mb-2">31%</p>
+                            <p class="text-brand-text-secondary font-medium">Cost Reduction</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                            <p class="text-5xl font-bold text-accent mb-2">1.5 kJ</p>
+                            <p class="text-brand-text-secondary font-medium">Kinetic Energy</p>
+                        </div>
+                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
+                            <p class="text-5xl font-bold text-accent mb-2">21%</p>
+                            <p class="text-brand-text-secondary font-medium">Reduced Max Flat Turn Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center pt-12 border-t border-gray-200">
+                    <a href="index.html" class="inline-flex items-center text-lg font-medium text-accent hover:text-brand-text-primary transition-colors">
+                        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                        Back to All Projects
+                    </a>
+                </div>
+
+            </section>
+
+
+            <!-- ============================================== -->
+            <!-- UPDATED DETAIL PAGE: DIFFERENTIAL MOUNT (FIXED FORMATTING) -->
+            <!-- ============================================== -->
+            <section id="page-differential-mount" class="page project-page-container mx-auto" style="display:none;">
+                <!-- Back Button -->
+                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
+                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
+                    Back to Projects
+                </a>
+
+                <!-- Project Header -->
+                <div class="mb-12">
+                    <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-text-primary mb-3">
+                        Turnbuckle Differential Mount & Tensioner
+                    </h1>
+                    <p class="text-xl text-accent font-medium">Mechanical Design Project, UC Berkeley</p>
+                    <div class="flex flex-wrap gap-2 mt-4">
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">SolidWorks</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">FEA</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Topology Optimization</span>
+                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Force Analysis</span>
+                    </div>
+                </div>
+
+                <!-- Project Details -->
+                <div class="space-y-10 text-brand-text-secondary text-lg leading-relaxed">
+                    
+                    <!-- 1. PROBLEM, PURPOSE, OBJECTIVE -->
+                    <section>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Problem</h3>
+                                <p>Standard differential mounts lack integrated, precise chain tensioning systems, forcing the use of separate, often cumbersome hardware.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Purpose</h3>
+                                <p>To engineer a consolidated differential mount that incorporates a robust, adjustable chain tensioner and a jacking bar interface.</p>
+                            </div>
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Objective</h3>
+                                <p>Design, optimize, and validate the integrated system using FEA, ensuring all components meet a minimum Factor of Safety (FoS) of 1.5.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 2. DESIGN PROCESS & IMPLEMENTATION -->
+                    <section>
+                        <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-3 mb-6 flex items-center">
+                            <i data-lucide="layers" class="w-6 h-6 mr-3 text-accent"></i> Design Process & Implementation
+                        </h2>
+                        
+                        <h3 class="font-display text-2xl font-semibold text-accent mt-6">A. Force Analysis & Mechanism Selection</h3>
+                        <ul class="list-disc list-inside space-y-3 ml-4">
+                            <li class="flex items-start">
+                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
+                                <div>Performed <strong>manual force analysis</strong> to establish baseline load conditions, accounting for chain wrap angle and taking moments along the differential.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
+                                <div>Engineered the mount to function as a <strong>bell crank mechanism</strong>, where adjusting a turnbuckle provides precise, measurable tension to the chain.</div>
+                            </li>
+                        </ul>
+
+                        <!-- Image Placeholder for the mechanism diagram -->
+                        <div class="bg-white p-4 rounded-xl shadow-inner my-6 border border-gray-200">
+                            <div class="w-full h-48 flex items-center justify-center bg-gray-100 border-2 border-gray-300 border-dashed rounded-lg">
+                                <div class="text-center">
+                                    <i data-lucide="cog" class="w-8 h-8 text-brand-text-muted mx-auto mb-2"></i>
+                                    <p class="text-brand-text-muted text-sm font-semibold">Image Placeholder: Bell Crank & Turnbuckle Mechanism</p>
+                                    <p class="text-xs text-gray-400">Diagram showing the force vectors and tensioning concept.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <h3 class="font-display text-2xl font-semibold text-accent mt-8">B. Component Optimization & Validation</h3>
+                        <ul class="list-disc list-inside space-y-3 ml-4">
+                            <li class="flex items-start">
+                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
+                                <div>Designed <strong>custom turnbuckles</strong> using hex pipe and threaded rods to achieve greater strength and finer adjustability than off-the-shelf parts.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
+                                <div>Conducted <strong>topology optimization</strong> studies on the mount and jacking bar to systematically remove non-critical material, minimizing weight.</div>
+                            </li>
+                            <li class="flex items-start">
+                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
+                                <div>Validated the final optimized geometry through comprehensive <strong>FEA in SolidWorks</strong>, ensuring all components met the minimum <strong>FoS of 1.5</strong> under all load cases.</div>
+                            </li>
+                        </ul>
+                         <!-- Image Placeholder for FEA/Topology -->
+                        <div class="bg-white p-4 rounded-xl shadow-inner my-6 border border-gray-200">
+                            <div class="w-full h-48 flex items-center justify-center bg-gray-100 border-2 border-gray-300 border-dashed rounded-lg">
+                                <div class="text-center">
+                                    <i data-lucide="scan" class="w-8 h-8 text-brand-text-muted mx-auto mb-2"></i>
+                                    <p class="text-brand-text-muted text-sm font-semibold">Image Placeholder: Topology Optimization / FEA Result</p>
+                                    <p class="text-xs text-gray-400">Showing the optimized geometry and stress validation (FoS > 1.5).</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                    
+                    <!-- 3. QUANTIFIABLE RESULTS -->
+                    <section>
+                        <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-3 mb-6 flex items-center">
+                            <i data-lucide="activity" class="w-6 h-6 mr-3 text-accent"></i> Quantifiable Results
+                        </h2>
+                        
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-6">
+                            
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                                <i data-lucide="weight" class="w-8 h-8 text-accent mx-auto mb-2"></i>
+                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">115g / 150g</p>
+                                <p class="text-sm font-medium text-brand-text-secondary">Final Optimized Mount Weights</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                                <i data-lucide="trending-down" class="w-8 h-8 text-accent mx-auto mb-2"></i>
+                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">50%</p>
+                                <p class="text-sm font-medium text-brand-text-secondary">Jacking Bar Weight Reduction</p>
+                            </div>
+                            
+                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
+                                <i data-lucide="shield-check" class="w-8 h-8 text-accent mx-auto mb-2"></i>
+                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">1.5 FoS</p>
+                                <p class="text-sm font-medium text-brand-text-secondary">Minimum Factor of Safety Validated</p>
+                            </div>
+                        </div>
+                        
+                        <p class="text-lg mt-8">
+                            The topology optimization and bell crank design were highly successful. The final mounts were reduced to <strong>115g and 150g</strong>, and the associated jacking bar's weight was <strong>reduced by 50%</strong>. All components, including tabs and mounting hardware, were validated in FEA to meet the strict <strong>1.5 Factor of Safety</strong> requirement.
+                        </p>
+                    </section>
+                </div>
+
+                <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
+                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
                 </footer>
             </section>
 
@@ -701,85 +944,6 @@
             </section>
 
             <!-- ============================================== -->
-            <!-- DETAIL PAGE: WIND TURBINE (EXISTING) -->
-            <!-- ============================================== -->
-            <section id="page-wind-turbine" class="page project-page-container mx-auto" style="display:none;">
-                <!-- Back Button -->
-                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
-                    Back to Projects
-                </a>
-
-                <!-- Project Header -->
-                <div class="mb-12">
-                    <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-text-primary mb-3">
-                        Wind Turbine Design & Analysis
-                    </h1>
-                    <p class="text-xl text-accent font-medium">UC Berkeley Mechanical Engineering Coursework</p>
-                    <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">SolidWorks</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">FEA</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Aerodynamics</span>
-                    </div>
-                </div>
-
-                <!-- Visual Placeholder Section -->
-                <div class="bg-white p-6 rounded-xl shadow-lg mb-12 border border-gray-200">
-                    <div class="w-full h-96 flex items-center justify-center bg-gray-100 border-4 border-accent/50 border-dashed rounded-lg">
-                        <div class="text-center">
-                            <i data-lucide="fan" class="w-12 h-12 text-accent mx-auto mb-2"></i>
-                            <p class="text-gray-600 text-lg font-semibold">CAD / Analysis Placeholder</p>
-                            <p class="text-sm text-gray-400">Rotor Blade Stress and Airflow Analysis</p>
-                        </div>
-                    </div>
-                    <p class="text-center text-xs text-brand-text-muted mt-3 italic">
-                        Simulated view of the final rotor prototype
-                    </p>
-                </div>
-
-                <!-- Project Details -->
-                <div class="space-y-8 text-brand-text-secondary text-lg leading-relaxed">
-                    <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-2">Iterative Design and Validation</h2>
-                    <p>
-                        This project focused on the complete design cycle for a wind turbine rotor, from conceptual modeling to structural and aerodynamic validation, emphasizing manufacturability and high Factor of Safety (FoS).
-                    </p>
-
-                    <h3 class="font-display text-2xl font-semibold text-accent flex items-center">
-                        <i data-lucide="trending-up" class="w-5 h-5 mr-2"></i> Aerodynamic Efficiency Improvement
-                    </h3>
-                    <ul class="list-disc list-inside space-y-3 ml-4">
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Modeled and physically tested <strong>3 distinct rotor prototypes</strong> over an iterative cycle.</div>
-                        </li>
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Through adjustments to blade profile (airfoil) and pitch angle, achieved an <strong>18% improvement</strong> in aerodynamic efficiency from the initial baseline design to the final prototype.</div>
-                        </li>
-                    </ul>
-
-                    <h3 class="font-display text-2xl font-semibold text-accent flex items-center">
-                        <i data-lucide="shield-check" class="w-5 h-5 mr-2"></i> Structural Integrity with FEA
-                    </h3>
-                    <ul class="list-disc list-inside space-y-3 ml-4">
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Utilized <strong>FEA</strong> (Finite Element Analysis) in SolidWorks to validate the structural integrity of the rotors under maximum predicted operational wind loads.</div>
-                        </li>
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Ensured a minimum <strong>Factor of Safety (FoS) greater than 2.0</strong> across all critical components, demonstrating proficiency in safe and reliable mechanical design.</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Footer -->
-                <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
-                </footer>
-            </section>
-
-            <!-- ============================================== -->
             <!-- DETAIL PAGE: EXOSKELETON (EXISTING) -->
             <!-- ============================================== -->
             <section id="page-exoskeleton" class="page project-page-container mx-auto" style="display:none;">
@@ -848,352 +1012,6 @@
                         <li class="flex items-start">
                             <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
                             <div>Successfully reduced the weight of the critical joint mechanisms by <strong>13%</strong> without compromising the Factor of Safety, critical for long-term user comfort and battery life.</div>
-                        </li>
-                    </ul>
-                </div>
-
-                <!-- Footer -->
-                <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
-                </footer>
-            </section>
-
-            <!-- ============================================== -->
-            <!-- UPDATED DETAIL PAGE: MASTER OOGWAY (REDESIGNED) -->
-            <!-- ============================================== -->
-            <section id="page-master-oogway" class="page project-page-container mx-auto" style="display:none;">
-                
-                <!-- Top Bar -->
-                <div class="flex justify-between items-center mb-12">
-                     <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent transition-colors font-medium">
-                        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
-                        Back to Projects
-                    </a>
-                    <div class="flex space-x-3">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">DFM</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">FEA</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full">Kinetic Energy</span>
-                    </div>
-                </div>
-
-                <!-- Project Title & Hero -->
-                <h1 class="font-display text-5xl font-bold text-brand-text-primary mb-2">15 lb Combat Robot: Master Oogway</h1>
-                <p class="text-xl text-brand-text-secondary mb-8">Cost Optimization & High-KE Weapon Design</p>
-                
-                <div class="w-full mb-16">
-                     <img src="images/Master Oogway Final Rendering.png" alt="Master Oogway Final Rendering" class="w-full h-auto rounded-xl shadow-lg" onerror="this.style.display='none';">
-                </div>
-
-                <!-- 1. WHAT (The Challenge) -->
-                <div class="mb-16">
-                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-4">What</h2>
-                    <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
-                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
-                            Our team faced a critical gap: our 15 lb combat robot design lacked a high-Kinetic Energy (KE) weapon system that could be manufactured within our strict budget and weight limits.
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-                            <div>
-                                <h3 class="font-bold text-brand-text-primary mb-2">The Problem</h3>
-                                <p class="text-brand-text-secondary">Existing designs were either too expensive to CNC or too heavy for the 15 lb weight class.</p>
-                            </div>
-                            <div>
-                                <h3 class="font-bold text-brand-text-primary mb-2">The Objective</h3>
-                                <p class="text-brand-text-secondary">Design a cost-optimized, high-KE vertical spinner that adheres to the 15 lb weight limit and reduces manufacturing expenditure by at least 25%.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. HOW (Design Process) -->
-                <div class="mb-16">
-                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">How</h2>
-                    
-                    <!-- Process Step 1: Concept -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-bold text-accent mb-3">1. Drisk Architecture Selection</h3>
-                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
-                            I selected an asymmetrical <strong>Drum-Disk Hybrid (Drisk)</strong> geometry. This architecture maximizes the <strong>Moment of Inertia (MoI)</strong> relative to weight, providing the high kinetic energy of a drum spinner without the prohibitive cost of CNC-machining a complex steel eggbeater shape.
-                        </p>
-                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <img src="images/Master Oogway Motor Mount.png" alt="Motor Mount Design" class="w-full h-48 object-contain rounded" onerror="this.style.display='none';">
-                                <p class="text-center text-xs text-brand-text-muted mt-2">Motor Mount Design</p>
-                             </div>
-                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <img src="images/Master Oogway Weapon Assembly.png" alt="Weapon Assembly" class="w-full h-48 object-contain rounded" onerror="this.style.display='none';">
-                                <p class="text-center text-xs text-brand-text-muted mt-2">Weapon Assembly</p>
-                             </div>
-                        </div>
-                    </div>
-
-                    <!-- Process Step 2: Iterative Optimization -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-bold text-accent mb-3">2. Iterative Optimization for DFM</h3>
-                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
-                            During the DFM review, we hit a roadblock: our initial weapon design was too thick for our vendor to cost-effectively waterjet. I executed an iterative redesign (shown below), making the disks <strong>thinner</strong> but increasing their <strong>outer diameter</strong> to maintain the exact target MoI and mass while enabling cheap waterjet cutting.
-                        </p>
-                        <div class="bg-white p-4 rounded-xl shadow-inner border border-gray-200 mb-6">
-                            <img src="images/Master Oogway Disk Alterations.jpg" alt="Weapon Disk Iteration Process" class="w-full h-auto rounded-lg" onerror="this.style.display='none';">
-                            <p class="text-center text-sm text-brand-text-secondary mt-3 font-medium">
-                                Design Evolution: Thinner, wider profile optimized for waterjet cutting.
-                            </p>
-                        </div>
-                    </div>
-
-                    <!-- Process Step 3: Manufacturing -->
-                    <div class="mb-12">
-                        <h3 class="text-xl font-bold text-accent mb-3">3. Manufacturing & GD&T</h3>
-                        <p class="text-lg text-brand-text-secondary leading-relaxed mb-6">
-                            To connect these new disks, I designed a custom <strong>6061 Aluminum hub</strong>. I chose to manually tap the bolt holes rather than paying for CNC threading, contributing to a <strong>31% cost reduction</strong>. I produced detailed GD&T drawings to ensure the motor mount bend and hub fit were perfect on the first try.
-                        </p>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                            <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <img src="images/Master Oogway - Bearing Mount Drawing v2-1.png" alt="Bearing Mount Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
-                            </div>
-                            <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <img src="images/MasterOogwayWeaponHubDrawingManufacturing-1.png" alt="Manufacturing Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
-                            </div>
-                             <div class="bg-white p-2 rounded-lg border border-gray-200 shadow-sm">
-                                <img src="images/MasterOogwayWeaponHubDrawingTapping-1.png" alt="Tapping Drawing" class="w-full h-auto rounded" onerror="this.style.display='none';">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. RESULTS -->
-                <div class="mb-16">
-                    <h2 class="font-display text-3xl font-bold text-brand-text-primary mb-6">Results</h2>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
-                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
-                            <p class="text-5xl font-bold text-accent mb-2">31%</p>
-                            <p class="text-brand-text-secondary font-medium">Cost Reduction</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
-                            <p class="text-5xl font-bold text-accent mb-2">1.5 kJ</p>
-                            <p class="text-brand-text-secondary font-medium">Kinetic Energy</p>
-                        </div>
-                        <div class="bg-white p-8 rounded-xl border border-gray-200 shadow-sm">
-                            <p class="text-5xl font-bold text-accent mb-2">100%</p>
-                            <p class="text-brand-text-secondary font-medium">DFM Compliance</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="text-center pt-12 border-t border-gray-200">
-                    <a href="index.html" class="inline-flex items-center text-lg font-medium text-accent hover:text-brand-text-primary transition-colors">
-                        <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
-                        Back to All Projects
-                    </a>
-                </div>
-
-            </section>
-
-
-            <!-- ============================================== -->
-            <!-- UPDATED DETAIL PAGE: DIFFERENTIAL MOUNT (FIXED FORMATTING) -->
-            <!-- ============================================== -->
-            <section id="page-differential-mount" class="page project-page-container mx-auto" style="display:none;">
-                <!-- Back Button -->
-                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
-                    Back to Projects
-                </a>
-
-                <!-- Project Header -->
-                <div class="mb-12">
-                    <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-text-primary mb-3">
-                        Turnbuckle Differential Mount & Tensioner
-                    </h1>
-                    <p class="text-xl text-accent font-medium">Mechanical Design Project, UC Berkeley</p>
-                    <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">SolidWorks</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">FEA</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Topology Optimization</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Force Analysis</span>
-                    </div>
-                </div>
-
-                <!-- Project Details -->
-                <div class="space-y-10 text-brand-text-secondary text-lg leading-relaxed">
-                    
-                    <!-- 1. PROBLEM, PURPOSE, OBJECTIVE -->
-                    <section>
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Problem</h3>
-                                <p>Standard differential mounts lack integrated, precise chain tensioning systems, forcing the use of separate, often cumbersome hardware.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Purpose</h3>
-                                <p>To engineer a consolidated differential mount that incorporates a robust, adjustable chain tensioner and a jacking bar interface.</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <h3 class="font-display text-2xl font-bold text-brand-text-primary mb-2">Objective</h3>
-                                <p>Design, optimize, and validate the integrated system using FEA, ensuring all components meet a minimum Factor of Safety (FoS) of 1.5.</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <!-- 2. DESIGN PROCESS & IMPLEMENTATION -->
-                    <section>
-                        <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-3 mb-6 flex items-center">
-                            <i data-lucide="layers" class="w-6 h-6 mr-3 text-accent"></i> Design Process & Implementation
-                        </h2>
-                        
-                        <h3 class="font-display text-2xl font-semibold text-accent mt-6">A. Force Analysis & Mechanism Selection</h3>
-                        <ul class="list-disc list-inside space-y-3 ml-4">
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Performed <strong>manual force analysis</strong> to establish baseline load conditions, accounting for chain wrap angle and taking moments along the differential.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Engineered the mount to function as a <strong>bell crank mechanism</strong>, where adjusting a turnbuckle provides precise, measurable tension to the chain.</div>
-                            </li>
-                        </ul>
-
-                        <!-- Image Placeholder for the mechanism diagram -->
-                        <div class="bg-white p-4 rounded-xl shadow-inner my-6 border border-gray-200">
-                            <div class="w-full h-48 flex items-center justify-center bg-gray-100 border-2 border-gray-300 border-dashed rounded-lg">
-                                <div class="text-center">
-                                    <i data-lucide="cog" class="w-8 h-8 text-brand-text-muted mx-auto mb-2"></i>
-                                    <p class="text-brand-text-muted text-sm font-semibold">Image Placeholder: Bell Crank & Turnbuckle Mechanism</p>
-                                    <p class="text-xs text-gray-400">Diagram showing the force vectors and tensioning concept.</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <h3 class="font-display text-2xl font-semibold text-accent mt-8">B. Component Optimization & Validation</h3>
-                        <ul class="list-disc list-inside space-y-3 ml-4">
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Designed <strong>custom turnbuckles</strong> using hex pipe and threaded rods to achieve greater strength and finer adjustability than off-the-shelf parts.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Conducted <strong>topology optimization</strong> studies on the mount and jacking bar to systematically remove non-critical material, minimizing weight.</div>
-                            </li>
-                            <li class="flex items-start">
-                                <i data-lucide="chevrons-right" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                                <div>Validated the final optimized geometry through comprehensive <strong>FEA in SolidWorks</strong>, ensuring all components met the minimum <strong>FoS of 1.5</strong> under all load cases.</div>
-                            </li>
-                        </ul>
-                         <!-- Image Placeholder for FEA/Topology -->
-                        <div class="bg-white p-4 rounded-xl shadow-inner my-6 border border-gray-200">
-                            <div class="w-full h-48 flex items-center justify-center bg-gray-100 border-2 border-gray-300 border-dashed rounded-lg">
-                                <div class="text-center">
-                                    <i data-lucide="scan" class="w-8 h-8 text-brand-text-muted mx-auto mb-2"></i>
-                                    <p class="text-brand-text-muted text-sm font-semibold">Image Placeholder: Topology Optimization / FEA Result</p>
-                                    <p class="text-xs text-gray-400">Showing the optimized geometry and stress validation (FoS > 1.5).</p>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-                    
-                    <!-- 3. QUANTIFIABLE RESULTS -->
-                    <section>
-                        <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-3 mb-6 flex items-center">
-                            <i data-lucide="activity" class="w-6 h-6 mr-3 text-accent"></i> Quantifiable Results
-                        </h2>
-                        
-                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center mt-6">
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <i data-lucide="weight" class="w-8 h-8 text-accent mx-auto mb-2"></i>
-                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">115g / 150g</p>
-                                <p class="text-sm font-medium text-brand-text-secondary">Final Optimized Mount Weights</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <i data-lucide="trending-down" class="w-8 h-8 text-accent mx-auto mb-2"></i>
-                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">50%</p>
-                                <p class="text-sm font-medium text-brand-text-secondary">Jacking Bar Weight Reduction</p>
-                            </div>
-                            <div class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm">
-                                <i data-lucide="shield-check" class="w-8 h-8 text-accent mx-auto mb-2"></i>
-                                <p class="text-4xl font-extrabold text-brand-text-primary mb-1">1.5 FoS</p>
-                                <p class="text-sm font-medium text-brand-text-secondary">Minimum Factor of Safety Validated</p>
-                            </div>
-                        </div>
-                        
-                        <p class="text-lg mt-8">
-                            The topology optimization and bell crank design were highly successful. The final mounts were reduced to <strong>115g and 150g</strong>, and the associated jacking bar's weight was <strong>reduced by 50%</strong>. All components, including tabs and mounting hardware, were validated in FEA to meet the strict <strong>1.5 Factor of Safety</strong> requirement.
-                        </p>
-                    </section>
-                </div>
-
-                <footer class="mt-16 py-8 text-center text-brand-text-muted text-sm border-t border-gray-200">
-                    <a href="index.html" class="hover:text-accent transition-colors">Return to Main Portfolio</a>
-                </footer>
-            </section>
-
-            <!-- ============================================== -->
-            <!-- NEW DETAIL PAGE: EDUROAMERS (1 LB COMBAT ROBOT) -->
-            <!-- ============================================== -->
-            <section id="page-eduroamers" class="page project-page-container mx-auto" style="display:none;">
-                <!-- Back Button -->
-                <a href="index.html" class="flex items-center text-brand-text-muted hover:text-accent mb-10 transition-colors">
-                    <i data-lucide="arrow-left" class="w-5 h-5 mr-2"></i>
-                    Back to Projects
-                </a>
-
-                <!-- Project Header -->
-                <div class="mb-12">
-                    <h1 class="font-display text-4xl sm:text-5xl font-bold text-brand-text-primary mb-3">
-                        1 lb Combat Robot: Eduroamers
-                    </h1>
-                    <p class="text-xl text-accent font-medium">Mentorship Lead, Combat Robotics at Berkeley</p>
-                    <div class="flex flex-wrap gap-2 mt-4">
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Mentorship</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">CAD</span>
-                        <span class="px-3 py-1 bg-gray-100 text-gray-600 text-sm font-medium rounded-full border border-gray-200">Rapid Prototyping</span>
-                    </div>
-                </div>
-
-                <!-- Visual Placeholder Section -->
-                <div class="bg-white p-6 rounded-xl shadow-lg mb-12 border border-gray-200">
-                    <div class="w-full h-96 flex items-center justify-center bg-gray-100 border-4 border-accent/50 border-dashed rounded-lg">
-                        <div class="text-center">
-                            <i data-lucide="graduation-cap" class="w-12 h-12 text-accent mx-auto mb-2"></i>
-                            <p class="text-gray-600 text-lg font-semibold">Antweight Robot Placeholder</p>
-                            <p class="text-sm text-gray-400">Educational Antweight Flipper Robot</p>
-                        </div>
-                    </div>
-                    <p class="text-center text-xs text-brand-text-muted mt-3 italic">
-                        A simple, robust design for teaching DFM basics
-                    </p>
-                </div>
-
-                <!-- Project Details -->
-                <div class="space-y-8 text-brand-text-secondary text-lg leading-relaxed">
-                    <h2 class="font-display text-3xl font-bold text-brand-text-primary border-b border-gray-200 pb-2">Educational Robotics and Prototyping</h2>
-                    <p>
-                        Eduroamers was a structured, low-complexity project designed to onboard new club members, teaching essential skills in CAD, design for manufacturing (DFM), and electronics assembly in the 1 lb "ant-weight" class.
-                    </p>
-
-                    <h3 class="font-display text-2xl font-semibold text-accent flex items-center">
-                        <i data-lucide="user-check" class="w-5 h-5 mr-2"></i> Mentoring New Engineers
-                    </h3>
-                    <ul class="list-disc list-inside space-y-3 ml-4">
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Trained <strong>70+ members</strong> in SolidWorks, Fusion, soldering techniques, and basic mechanical assembly through structured workshops centered around this simple build.</div>
-                        </li>
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Developed an easily manufacturable chassis design using off-the-shelf components and accessible 3D printing techniques (PLA/PETG).</div>
-                        </li>
-                    </ul>
-
-                    <h3 class="font-display text-2xl font-semibold text-accent flex items-center">
-                        <i data-lucide="lightbulb" class="w-5 h-5 mr-2"></i> Design Philosophy
-                    </h3>
-                    <ul class="list-disc list-inside space-y-3 ml-4">
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Prioritized <strong>robustness and ease of repair</strong> over complex mechanisms, ensuring a positive first-time builder experience.</div>
-                        </li>
-                        <li class="flex items-start">
-                            <i data-lucide="check-circle" class="w-5 h-5 mr-2 text-accent flex-shrink-0 mt-1"></i>
-                            <div>Conducted final design reviews for all student-led variations of the robot, providing actionable feedback on structural integrity and compliance with competition rules.</div>
                         </li>
                     </ul>
                 </div>
